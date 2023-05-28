@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "db_ahavah";
+$dbname = "ahavah_db";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
