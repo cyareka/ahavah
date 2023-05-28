@@ -3,10 +3,22 @@ span {
 }
 
 /* MOBILE */
-
+@media (max-width: 749px) {
+  .table {
+    overflow-x: auto; }
+  .add {
+    display: block }
+}
 
 /* LARGER THAN TABLET */
-@media (min-width: 768px) {
+@media (min-width: 750px) {
+  .head {
+    margin-top: 15%;}
+  .add {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; }
   h1 {
     font-size: 11em;
     margin-top: 15%;

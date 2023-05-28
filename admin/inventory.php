@@ -2,26 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ahavah Reservation System</title>
+  <title>Inventory | Ahavah</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet"href="../css/normalize.css">
   <link rel="stylesheet" href="../css/skeleton.css">
   <link rel="stylesheet" href="../css/custom.css">
-  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
   <script src="./backend/site.js"></script>
 </head>
-<style>
-
-</style>
 <body>
   <nav class="navbar">
     <div class="container">
       <ul class="navbar-list">
-        <li class="navbar-item"><a href="../landing.php" class="navbar-link">Home</a></li>
         <li class="navbar-item"><a href="reservation.php" class="navbar-link">Reservations</a></li>
         <li class="navbar-item">
           <a href="#" class="navbar-link" data-popover="codeNavPopover">Records</a>
@@ -32,19 +32,22 @@
             </ul>
           </div>
         </li>
-
         <li class="navbar-item"><a href="inventory.php" class="navbar-link">Inventory</a></li>
+        <li class="navbar-item"><a href="logout.php" class="navbar-link">Logout</a></li>
       </ul>
     </div>
   </nav>
   <div class="section inventory">
     <div class="container">
-      <div class="row">
-        <div class="one-half column" style="margin-top: 10%;">
+      <div class="row head">
+        <div class="one-half column">
           <h2>Inventory</h2>
         </div>
+        <div class="one-half column add">
+          <a class="button button-primary" href="add_med_form.php">Add</a>
+        </div>
       </div>
-      <div class="row">
+      <div class="row table" style="overflow-x: scroll;">
         <table class="twelve columns">
           <thead>
             <tr>
@@ -55,11 +58,13 @@
               <td>SUPPLIER NAME</td>
               <td>SUPPLIER PHONE</td>
               <td>BATCH NO.</td>
+              <td>EDIT</td>
+              <td>DELETE</td>
             </tr>
           </thead>
           <tbody>
             <?php
-              require_once './backend/config.php';
+              require_once '../backend/config.php';
               $sql = "SELECT * FROM Inventory";
               if ($result = $conn -> query($sql)) {
                 while ($row = $result -> fetch_assoc()) {
@@ -73,15 +78,18 @@
                 }
               }
             ?>
-            <td><?php echo $MED_ID; ?></td>
-            <td><?php echo $MED_TYPE; ?></td>
-            <td><?php echo $QUANTITY; ?></td>
-            <td><?php echo $SOURCE_LOCATION; ?></td>
-            <td><?php echo $SUPPLIER_NAME; ?></td>
-            <td><?php echo $SUPPLIER_PHONE; ?></td>
-            <td><?php echo $BATCH_NO; ?></td>
-            <td><a href="./admin/edit_med_form.php?=<?php echo $MED_ID; ?>" class="button button-primary">Edit</a></td>
-            <td><a href="./function/del_med.php?=<?php echo $MED_ID; ?>">Delete</a></td>
+            <tr>
+              <td><?php echo $MED_ID; ?></td>
+              <td><?php echo $MED_TYPE; ?></td>
+              <td><?php echo $QUANTITY; ?></td>
+              <td><?php echo $SOURCE_LOCATION; ?></td>
+              <td><?php echo $SUPPLIER_NAME; ?></td>
+              <td><?php echo $SUPPLIER_PHONE; ?></td>
+              <td><?php echo $BATCH_NO; ?></td>
+
+              <td><a href="./admin/edit_med_form.php?=<?php echo $MED_ID; ?>" class="button button-primary">Edit</a></td>
+              <td><a href="./function/del_med.php?=<?php echo $MED_ID; ?>">Delete</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
