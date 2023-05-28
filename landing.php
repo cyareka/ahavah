@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
 
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-  <script src="./backend/site.js"></script>
+  <script src="./site.js"></script>
 </head>
 <style>
   @media (max-width: 749px) {

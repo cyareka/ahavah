@@ -58,7 +58,22 @@ $(document).ready(function() {
     $('html, body').animate({
         scrollTop: $("#elementtoScrollToID").offset().top
     }, 2000);
-  });
+});
+
+  function resize() {
+    $body.removeClass('has-docked-nav')
+    navOffsetTop = $nav.offset().top
+    onScroll()
+  }
+
+  function onScroll() {
+    if(navOffsetTop < $window.scrollTop() && !$body.hasClass('has-docked-nav')) {
+      $body.addClass('has-docked-nav')
+    }
+    if(navOffsetTop > $window.scrollTop() && $body.hasClass('has-docked-nav')) {
+      $body.removeClass('has-docked-nav')
+    }
+  }
 
   function escapeHtml(string) {
     return String(string).replace(/[&<>"'\/]/g, function (s) {
@@ -72,6 +87,7 @@ $(document).ready(function() {
       $(this).html(newContent)
     })
   }
+
 
   init();
 

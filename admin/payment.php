@@ -55,19 +55,18 @@
           <h2>Reservation</h2>
         </div>
         <div class="one-half column add">
-          <a class="button button-primary" href="add_client_form.php">Add</a>
+          <a class="button button-primary" href="add_pay_form.php">Add</a>
         </div>
       </div>
       <div class="row table" style="overflow-x: scroll;">
         <table class="twelve columns">
           <thead>
             <tr>
-              <td>CLIENT_ID</td>
-              <td>CLIENT_FNAME</td>
-              <td>CLIENT_LNAME</td>
-              <td>CLIENT_PNAME</td>
-              <td>CLIENT_PHONE</td>
-              <td>CLIENT_MESSENGER</td>
+              <td>PAY_ID</td>
+              <td>AMOUNT</td>
+              <td>PAY_TYPE</td>
+              <td>PAY_RECEIPT</td>
+              <td>PAY_STATUS</td>
               <td>EDIT</td>
               <td>DELETE</td>
             </tr>
@@ -78,25 +77,23 @@
               $sql = "SELECT * FROM Hairdressers";
               if ($result = $conn -> query($sql)) {
                 while ($row = $result -> fetch_assoc()) {
-                  $CLIENT_ID = $row['CLIENT_ID'];
-                  $CLIENT_FNAME = $row['CLIENT_FNAME'];
-                  $CLIENT_LNAME = $row['CLIENT_LNAME'];
-                  $CLIENT_PNAME = $row['CLIENT_PNAME'];
-                  $CLIENT_PHONE = $row['CLIENT_PHONE'];
-                  $CLIENT_MESSENGER = $row['CLIENT_MESSENGER'];
+                  $PAY_ID = $row['PAY_ID'];
+                  $AMOUNT = $row['AMOUNT'];
+                  $PAY_TYPE = $row['PAY_TYPE'];
+                  $PAY_RECEIPT = $row['PAY_RECEIPT'];
+                  $PAY_STATUS = $row['PAY_STATUS'];
                 }
               }
           ?>
             <tr>
-              <td><?php echo $CLIENT_ID; ?></td>
-              <td><?php echo $CLIENT_FNAME; ?></td>
-              <td><?php echo $CLIENT_LNAME; ?></td>
-              <td><?php echo $CLIENT_PNAME; ?></td>
-              <td><?php echo $CLIENT_PHONE; ?></td>
-              <td><?php echo $CLIENT_MESSENGER; ?></td>
+              <td><?php echo $PAY_ID; ?></td>
+              <td><?php echo $AMOUNT; ?></td>
+              <td><?php echo $PAY_TYPE; ?></td>
+              <td><?php echo $PAY_RECEIPT; ?></td>
+              <td><?php echo $PAY_STATUS; ?></td>
 
-              <td><a href="./admin/edit_client_form.php?=<?php echo $CLIENT_ID; ?>" class="button">Edit</a></td>
-              <td><a href="./function/del_client.php?=<?php echo $CLIENT_ID; ?>" class="button button-primary">Delete</a></td>
+              <td><a href="./admin/edit_pay_form.php?=<?php echo $PAY_ID; ?>" class="button">Edit</a></td>
+              <td><a href="./function/del_pay.php?=<?php echo $PAY_ID; ?>" class="button button-primary">Delete</a></td>
             </tr>
           </tbody>
         </table>

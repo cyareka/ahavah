@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Clients | Ahavah</title>
+  <title>Individual Services | Ahavah</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,22 +52,19 @@
     <div class="container"> 
       <div class="row head" >
         <div class="one-half column">
-          <h2>Reservation</h2>
+          <h2>Individual Services</h2>
         </div>
         <div class="one-half column add">
-          <a class="button button-primary" href="add_client_form.php">Add</a>
+          <a class="button button-primary" href="add_is_form.php">Add</a>
         </div>
       </div>
       <div class="row table" style="overflow-x: scroll;">
         <table class="twelve columns">
           <thead>
             <tr>
-              <td>CLIENT_ID</td>
-              <td>CLIENT_FNAME</td>
-              <td>CLIENT_LNAME</td>
-              <td>CLIENT_PNAME</td>
-              <td>CLIENT_PHONE</td>
-              <td>CLIENT_MESSENGER</td>
+              <td>SERVICE_ID</td>
+              <td>IS_NAME</td>
+              <td>IS_DESC</td>
               <td>EDIT</td>
               <td>DELETE</td>
             </tr>
@@ -75,28 +72,22 @@
           <tbody>
           <?php
               require_once '../backend/config.php';
-              $sql = "SELECT * FROM Hairdressers";
+              $sql = "SELECT * FROM Indiv_Service";
               if ($result = $conn -> query($sql)) {
                 while ($row = $result -> fetch_assoc()) {
-                  $CLIENT_ID = $row['CLIENT_ID'];
-                  $CLIENT_FNAME = $row['CLIENT_FNAME'];
-                  $CLIENT_LNAME = $row['CLIENT_LNAME'];
-                  $CLIENT_PNAME = $row['CLIENT_PNAME'];
-                  $CLIENT_PHONE = $row['CLIENT_PHONE'];
-                  $CLIENT_MESSENGER = $row['CLIENT_MESSENGER'];
+                  $SERVICE_ID = $row['SERVICE_ID'];
+                  $IS_NAME = $row['IS_NAME'];
+                  $IS_DESC = $row['IS_DESC'];
                 }
               }
           ?>
             <tr>
-              <td><?php echo $CLIENT_ID; ?></td>
-              <td><?php echo $CLIENT_FNAME; ?></td>
-              <td><?php echo $CLIENT_LNAME; ?></td>
-              <td><?php echo $CLIENT_PNAME; ?></td>
-              <td><?php echo $CLIENT_PHONE; ?></td>
-              <td><?php echo $CLIENT_MESSENGER; ?></td>
-
-              <td><a href="./admin/edit_client_form.php?=<?php echo $CLIENT_ID; ?>" class="button">Edit</a></td>
-              <td><a href="./function/del_client.php?=<?php echo $CLIENT_ID; ?>" class="button button-primary">Delete</a></td>
+              <td><?php echo $SERVICE_ID; ?></td>
+              <td><?php echo $IS_NAME; ?></td>
+              <td><?php echo $IS_DESC; ?></td>
+        
+              <td><a href="./admin/edit_is_form.php?=<?php echo $SERVICE_ID; ?>" class="button">Edit</a></td>
+              <td><a href="./function/del_is.php?=<?php echo $SERVICE_ID; ?>" class="button button-primary">Delete</a></td>
             </tr>
           </tbody>
         </table>
