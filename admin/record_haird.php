@@ -53,7 +53,7 @@
     <div class="container"> 
       <div class="row head" >
         <div class="one-half column">
-          <h2>Reservation</h2>
+          <h2>Hairdressers</h2>
         </div>
         <div class="one-half column add">
           <a class="button button-primary" href="add_haird_form.php">Add</a>
@@ -82,7 +82,7 @@
                   $HAIRD_FNAME = $row['HAIRD_FNAME'];
                   $HAIRD_LNAME = $row['HAIRD_LNAME'];
                   $HAIRD_PHONE = $row['HAIRD_PHONE'];
-                  $HAIRD_MESSENGER = $row['HAIRD_MESSENGER'];
+                  $HAIRD_MSNGER = $row['HAIRD_MSNGER'];
                 }
               }
           ?>
@@ -91,7 +91,7 @@
               <td><?php echo $HAIRD_FNAME; ?></td>
               <td><?php echo $HAIRD_LNAME; ?></td>
               <td><?php echo $HAIRD_PHONE; ?></td>
-              <td><?php echo $HAIRD_MESSENGER; ?></td>
+              <td><?php echo $HAIRD_MSNGER; ?></td>
 
               <td><a href="./admin/edit_haird_form.php?=<?php echo $HAIRD_ID; ?>" class="button">Edit</a></td>
               <td><a href="./function/del_haird.php?=<?php echo $HAIRD_ID; ?>" class="button button-primary">Delete</a></td>

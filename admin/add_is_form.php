@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Add Client | Ahavah</title>
+  <title>Add Individual Service | Ahavah</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,26 +21,20 @@
 <body>
   <div class="container">
     <div class="row head">
-      <h2>Add Client</h2>
+      <h2>Add Individual Service</h2>
     </div>
     <div class="row">
       <div>
-        <?php if (isset($errorMessage)) { ?>
+        <?php  if (isset($errorMessage)) { ?>
         <p><?= $errorMessage; ?></p>
         <?php } ?>
-        <form action="./function/add_client.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
-          <label for="CLIENT_ID">CLIENT_ID</label>
-            <input type="text" name="CLIENT_ID" id="CLIENT_ID" required>
-          <label for="CLIENT_FNAME">CLIENT_FNAME</label>
-            <input type="text" name="CLIENT_FNAME" id="CLIENT_FNAME" required>
-          <label for="CLIENT_LNAME">CLIENT_LNAME</label>
-            <input type="text" name="CLIENT_LNAME" id="CLIENT_LNAME" required>
-          <label for="CLIENT_PNAME">CLIENT_PNAME</label>
-            <input type="text" name="CLIENT_PNAME" id="CLIENT_PNAME" required>
-          <label for="CLIENT_PHONE">CLIENT_PHONE</label>
-            <input type="text" name="CLIENT_PHONE" id="CLIENT_PHONE" required>
-          <label for="CLIENT_MSNGR">CLIENT_MSNGR</label>
-            <input type="text" name="CLIENT_MSNGR" id="CLIENT_MSNGR" required>
+        <form action="./function/add_is.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+          <label for="SERVICE_ID">SERVICE_ID</label>
+            <input type="text" name="SERVICE_ID" id="SERVICE_ID" required>
+          <label for="IS_NAME">IS_NAME</label>
+            <input type="text" name="IS_NAME" id="IS_NAME" required>
+          <label for="IS_DESC">IS_DESC</label>
+            <input type="text" name="IS_DESC" id="IS_DESC" required>
           <button class="button button-primary" type="submit" name="add" id="add">Add</button>
         </form>
       </div>

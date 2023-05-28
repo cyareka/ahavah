@@ -1,19 +1,19 @@
 <?php /*
   require_once('./backend/config.php');
 
-  if (isset($_GET["HAIRD_ID"])) {
-    $HAIRD_ID = $_GET["HAIRD_ID"];
-    $sql = "SELECT * FROM Hairdressers WHERE HAIRD_ID = ".$HAIRD_ID;
+  if (isset($_GET["PAY_ID"])) {
+    $PAY_ID = $_GET["PAY_ID"];
+    $sql = "SELECT * FROM Payment WHERE PAY_ID = ".$PAY_ID;
 
     $result = $conn->query($sql);
 
     if ($result && $result->num_rows > 0) {
       $row = $result->fetch_assoc();
-      $HAIRD_ID = $row['HAIRD_ID'];
-      $HAIRD_FNAME = $row['HAIRD_FNAME'];   
-      $HAIRD_LNAME = $row['HAIRD_LNAME'];
-      $HAIRD_PHONE = $row['HAIRD_PHONE'];
-      $HAIRD_MSNGR = $row['HAIRD_MSNGER'];
+      $PAY_ID = $row['PAY_ID'];
+      $AMOUNT = $row['AMOUNT'];
+      $PAY_TYPE = $row['PAY_TYPE'];
+      $PAY_RECEIPT = $row['PAY_RECEIPT'];
+      $PAY_STATUS = $row['PAY_STATUS'];
 
       if (!$result) {
           echo "Error: " . $conn -> error;
@@ -25,11 +25,12 @@
     echo "Invalid ID.";
   }
 */ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Edit Hairdresser | Ahavah</title>
+  <title>Edit Client | Ahavah</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -48,22 +49,26 @@
 <body>
   <div class="container">
     <div class="row head">
-      <h2>Edit Hairdresser (<?php echo $HAIRD_ID; ?>)</h2>
+      <h2>Edit Payment (<?php echo $PAY_ID; ?>)</h2>
     </div>
     <div class="row">
       <div>
         <?php if (isset($errorMessage)) { ?>
         <p><?= $errorMessage; ?></p>
         <?php } ?>
-        <form action="./function/edit_haird.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
-          <label for="HAIRD_FNAME">HAIRD_FNAME</label>
-            <input type="text" name="HAIRD_FNAME" id="HAIRD_FNAME" required>
-          <label for="HAIRD_LNAME">HAIRD_LNAME</label>
-            <input type="text" name="HAIRD_LNAME" id="HAIRD_LNAME" required>
-          <label for="HAIRD_PHONE">HAIRD_PHONE</label>
-            <input type="text" name="HAIRD_PHONE" id="HAIRD_PHONE" required>
-          <label for="HAIRD_MSNGR">HAIRD_MSNGR</label>
-            <input type="text" name="HAIRD_MSNGR" id="HAIRD_MSNGR" required>
+        <form action="./function/edit_pay.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+          <label for="AMOUNT">AMOUNT</label>
+            <input type="text" name="AMOUNT" id="AMOUNT" required>
+          <label for="PAY_TYPE">PAY_TYPE</label>
+            <input type="text" name="PAY_TYPE" id="PAY_TYPE" required>
+          <label for="PAY_RECEIPT">PAY_RECEIPT</label>
+            <input type="file" name="PAY_RECEIPT" id="PAY_RECEIPT" required>
+          <label for="PAY_STATUS">PAY_STATUS</label>
+            <select name="PAY_STATUS" id="PAY_STATUS" required>
+              <option value="gcash">GCash</option>
+              <option value="bank-transfer">Bank Transfer</option>
+              <option value="cash">cash</option>
+            </select>
           <button class="button button-primary" type="submit" name="edit" id="edit">Edit</button>
         </form>
       </div>

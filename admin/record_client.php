@@ -53,7 +53,7 @@
     <div class="container"> 
       <div class="row head" >
         <div class="one-half column">
-          <h2>Reservation</h2>
+          <h2>Clients</h2>
         </div>
         <div class="one-half column add">
           <a class="button button-primary" href="add_client_form.php">Add</a>
@@ -84,7 +84,7 @@
                   $CLIENT_LNAME = $row['CLIENT_LNAME'];
                   $CLIENT_PNAME = $row['CLIENT_PNAME'];
                   $CLIENT_PHONE = $row['CLIENT_PHONE'];
-                  $CLIENT_MESSENGER = $row['CLIENT_MESSENGER'];
+                  $CLIENT_MSNGER = $row['CLIENT_MSNGER'];
                 }
               }
           ?>
@@ -94,7 +94,7 @@
               <td><?php echo $CLIENT_LNAME; ?></td>
               <td><?php echo $CLIENT_PNAME; ?></td>
               <td><?php echo $CLIENT_PHONE; ?></td>
-              <td><?php echo $CLIENT_MESSENGER; ?></td>
+              <td><?php echo $CLIENT_MSNGER; ?></td>
 
               <td><a href="./admin/edit_client_form.php?=<?php echo $CLIENT_ID; ?>" class="button">Edit</a></td>
               <td><a href="./function/del_client.php?=<?php echo $CLIENT_ID; ?>" class="button button-primary">Delete</a></td>

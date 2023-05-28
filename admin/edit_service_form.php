@@ -1,33 +1,8 @@
-<?php /*
-  require_once('./backend/config.php');
-
-  if (isset($_GET["SERVICE_ID"])) {
-    $SERVICE_ID = $_GET["SERVICE_ID"];
-    $sql = "SELECT * FROM Bundled_Service WHERE SERVICE_ID = ".$SERVICE_ID;
-
-    $result = $conn->query($sql);
-
-    if ($result && $result->num_rows > 0) {
-      $row = $result->fetch_assoc();
-      $SERVICE_ID = $row['SERVICE_ID'];
-      $BS_NAME = $row['BS_NAME'];   
-      $BS_DESC = $row['BS_DESC'];
-
-      if (!$result) {
-          echo "Error: " . $conn -> error;
-      }
-  } else {
-    echo "No record found.";
-  }
-  } else {
-    echo "Invalid ID.";
-  }
-*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Edit Bundled Service | Ahavah</title>
+  <title>Add Service | Ahavah</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -46,18 +21,20 @@
 <body>
   <div class="container">
     <div class="row head">
-        <h2>Edit Bundled Service (<?php echo $SERVICE_ID; ?>)</h2>
+      <h2>Edit Service (<?php echo $SERVICE_ID; ?>)</h2>
     </div>
     <div class="row">
       <div>
         <?php  if (isset($errorMessage)) { ?>
         <p><?= $errorMessage; ?></p>
         <?php } ?>
-        <form action="./function/edit_bs.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
-          <label for="BS_NAME">BS_NAME</label>
-            <input type="text" name="BS_NAME" id="BS_NAME" required>
-          <label for="BS_DESC">BS_DESC</label>
-            <input type="text" name="BS_DESC" id="BS_DESC" required>
+        <form action="./function/edit_service.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+          <label for="PRICE">PRICE</label>
+            <input type="text" name="PRICE" id="PRICE" required>
+          <label for="MED_ID">MED_ID</label>
+            <select name="MED_ID" id="MED_ID" required>
+              <option value=""></option>
+            </select>
           <button class="button button-primary" type="submit" name="edit" id="edit">Edit</button>
         </form>
       </div>

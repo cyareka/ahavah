@@ -19,6 +19,34 @@
   <script src="./backend/site.js"></script>
 </head>
 <body>
-  
+  <div class="container">
+    <div class="row head">
+      <h2>Add Medicine</h2>
+    </div>
+    <div class="row">
+      <div>
+        <?php  if (isset($errorMessage)) { ?>
+        <p><?= $errorMessage; ?></p>
+        <?php } ?>
+        <form action="./function/add_med.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+          <label for="MED_ID">MED_ID</label>
+            <input type="text" name="MED_ID" id="MED_ID" required>
+          <label for="MED_TYPE">MED_TYPE</label>
+            <input type="text" name="MED_TYPE" id="MED_TYPE" required>
+          <label for="QUANTITY">QUANTITY</label>
+            <input type="text" name="QUANTITY" id="QUANTITY" required>
+          <label for="SOURCE_LOCATION">SOURCE_LOCATION</label>
+            <input type="text" name="SOURCE_LOCATION" id="SOURCE_LOCATION" required>
+          <label for="SUPPLIER_NAME">SUPPLIER_NAME</label>
+            <input type="text" name="SUPPLIER_NAME" id="SUPPLIER_NAME" required>
+          <label for="SUPPLIER_PHONE">SUPPLIER_PHONE</label>
+            <input type="text" name="SUPPLIER_PHONE" id="SUPPLIER_PHONE" required>
+          <label for="BATCH_NO">BATCH_NO</label>
+            <input type="text" name="BATCH_NO" id="BATCH_NO" required>
+          <button class="button button-primary" type="submit" name="add" id="add">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Clients | Ahavah</title>
+  <title>Payment | Ahavah</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -53,7 +53,7 @@
     <div class="container"> 
       <div class="row head" >
         <div class="one-half column">
-          <h2>Reservation</h2>
+          <h2>Payment</h2>
         </div>
         <div class="one-half column add">
           <a class="button button-primary" href="add_pay_form.php">Add</a>
