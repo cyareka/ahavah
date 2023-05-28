@@ -1,5 +1,7 @@
 $(document).ready(function() {
-
+  $('.navbar-toggle').click(function() {
+    $('.navbar').toggleClass('navbar-collapsed');
+  });
   // Variables
   var $codeSnippets = $('.code-example-body'),
       $nav = $('.navbar'),

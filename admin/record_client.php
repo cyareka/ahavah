@@ -21,6 +21,7 @@
 <body>
   <nav class="navbar">
     <div class="container">
+      <button class="navbar-toggle">&#9776;</button>
       <ul class="navbar-list">
         <li class="navbar-item"><a href="reservation.php" class="navbar-link">Reservations</a></li>
         <li class="navbar-item">
