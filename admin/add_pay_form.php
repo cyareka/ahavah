@@ -32,15 +32,20 @@
           <label for="AMOUNT">AMOUNT</label>
             <input type="text" name="AMOUNT" id="AMOUNT" required>
           <label for="PAY_TYPE">PAY_TYPE</label>
-            <input type="text" name="PAY_TYPE" id="PAY_TYPE" required>
-          <label for="PAY_RECEIPT">PAY_RECEIPT</label>
-            <input type="file" name="PAY_RECEIPT" id="PAY_RECEIPT" required>
-          <label for="PAY_STATUS">PAY_STATUS</label>
-            <select name="PAY_STATUS" id="PAY_STATUS" required>
+            <select name="PAY_TYPE" id="PAY_TYPE" required>
               <option value="gcash">GCash</option>
               <option value="bank-transfer">Bank Transfer</option>
               <option value="cash">cash</option>
             </select>
+          <label for="PAY_RECEIPT">PAY_RECEIPT</label>
+            <input type="file" name="PAY_RECEIPT" id="PAY_RECEIPT" required>
+            
+          <label for="PAY_STATUS">PAY_STATUS</label>
+            <select name="PAY_STATUS" id="PAY_STATUS" required>
+              <option value="pending">Pending</option>
+              <option value="paid">Paid</option>
+            </select>
+            
           <button class="button button-primary" type="submit" name="add" id="add">Add</button>
         </form>
       </div>

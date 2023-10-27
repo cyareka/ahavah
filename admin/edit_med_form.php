@@ -1,32 +1,3 @@
-<?php /*
-  require_once('./backend/config.php');
-
-  if (isset($_GET["MED_ID"])) {
-    $MED_ID = $_GET["MED_ID"];
-    $sql = "SELECT * FROM Inventory WHERE MED_ID = ".$MED_ID;
-
-    $result = $conn->query($sql);
-
-    if ($result && $result->num_rows > 0) {
-      $row = $result->fetch_assoc();
-      $MED_ID = $row['MED_ID'];
-      $MED_TYPE = $row['MED_TYPE'];
-      $QUANTITY = $row['QUANTITY'];
-      $SOURCE_LOCATION = $row['SOURCE_LOCATION'];
-      $SUPPLIER_NAME = $row['SUPPLIER_NAME'];
-      $SUPPLIER_PHONE = $row['SUPPLIER_PHONE'];
-      $BATCH_NO = $row['BATCH_NO'];
-
-      if (!$result) {
-          echo "Error: " . $conn -> error;
-      }
-  } else {
-    echo "No record found.";
-  }
-  } else {
-    echo "Invalid ID.";
-  }
-*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,26 +21,249 @@
 <body>
   <div class="container">
     <div class="row head">
-      <h2>Edit Medicine (<?php echo $MED_ID; ?>)</h2>
+      <h2>Edit Medicine 
+        <?php 
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "Ahavah_DB";
+          $port = "3308";
+
+          $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+          if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+          }
+
+          if (isset($_GET["GIVEN_MED_ID"])) {
+            $GIVEN_MED_ID = $_GET["GIVEN_MED_ID"];
+
+            $sql = "SELECT * FROM Inventory WHERE MED_ID = '$GIVEN_MED_ID' ";
+
+            $result = $conn->query($sql);
+
+            if (!$result) {echo "Error: " . $conn -> error;}
+
+            $row = $result->fetch_assoc();
+            $STORED_MED_ID = $row['MED_ID'];
+            echo " $STORED_MED_ID";
+          } else {echo "No record found.";}
+        ?>
+      </h2>
     </div>
     <div class="row">
       <div>
         <?php  if (isset($errorMessage)) { ?>
         <p><?= $errorMessage; ?></p>
         <?php } ?>
-        <form action="./function/edit_med.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+        <form action="./function/edit_med.php?GIVEN_MED_ID='<?php 
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "Ahavah_DB";
+          $port = "3308";
+
+          $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+          if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+          }
+
+          $GIVEN_MED_ID = $_GET["GIVEN_MED_ID"];
+          echo "$GIVEN_MED_ID"; ?>'" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+
           <label for="MED_TYPE">MED_TYPE</label>
-            <input type="text" name="MED_TYPE" id="MED_TYPE" required>
+            <input type="text" name="MED_TYPE" id="MED_TYPE" 
+                value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_MED_ID"])) {
+                    $GIVEN_MED_ID = $_GET["GIVEN_MED_ID"];
+
+                    $sql = "SELECT * FROM Inventory WHERE MED_ID = '$GIVEN_MED_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_MED_TYPE = $row['MED_TYPE'];
+                    echo "$STORED_MED_TYPE";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
+
           <label for="QUANTITY">QUANTITY</label>
-            <input type="text" name="QUANTITY" id="QUANTITY" required>
+            <input type="text" name="QUANTITY" id="QUANTITY" 
+                value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_MED_ID"])) {
+                    $GIVEN_MED_ID = $_GET["GIVEN_MED_ID"];
+
+                    $sql = "SELECT * FROM Inventory WHERE MED_ID = '$GIVEN_MED_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_QUANTITY = $row['QUANTITY'];
+                    echo "$STORED_QUANTITY";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
+
           <label for="SOURCE_LOCATION">SOURCE_LOCATION</label>
-            <input type="text" name="SOURCE_LOCATION" id="SOURCE_LOCATION" required>
+            <input type="text" name="SOURCE_LOCATION" id="SOURCE_LOCATION" 
+                value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_MED_ID"])) {
+                    $GIVEN_MED_ID = $_GET["GIVEN_MED_ID"];
+
+                    $sql = "SELECT * FROM Inventory WHERE MED_ID = '$GIVEN_MED_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_SOURCE_LOCATION = $row['SOURCE_LOCATION'];
+                    echo "$STORED_SOURCE_LOCATION";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
+
           <label for="SUPPLIER_NAME">SUPPLIER_NAME</label>
-            <input type="text" name="SUPPLIER_NAME" id="SUPPLIER_NAME" required>
+            <input type="text" name="SUPPLIER_NAME" id="SUPPLIER_NAME" 
+                value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_MED_ID"])) {
+                    $GIVEN_MED_ID = $_GET["GIVEN_MED_ID"];
+
+                    $sql = "SELECT * FROM Inventory WHERE MED_ID = '$GIVEN_MED_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_SUPPLIER_NAME = $row['SUPPLIER_NAME'];
+                    echo "$STORED_SUPPLIER_NAME";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
+
           <label for="SUPPLIER_PHONE">SUPPLIER_PHONE</label>
-            <input type="text" name="SUPPLIER_PHONE" id="SUPPLIER_PHONE" required>
+            <input type="text" name="SUPPLIER_PHONE" id="SUPPLIER_PHONE" 
+                value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_MED_ID"])) {
+                    $GIVEN_MED_ID = $_GET["GIVEN_MED_ID"];
+
+                    $sql = "SELECT * FROM Inventory WHERE MED_ID = '$GIVEN_MED_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_SUPPLIER_PHONE = $row['SUPPLIER_PHONE'];
+                    echo "$STORED_SUPPLIER_PHONE";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
+
           <label for="BATCH_NO">BATCH_NO</label>
-            <input type="text" name="BATCH_NO" id="BATCH_NO" required>
+            <input type="text" name="BATCH_NO" id="BATCH_NO" 
+                value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_MED_ID"])) {
+                    $GIVEN_MED_ID = $_GET["GIVEN_MED_ID"];
+
+                    $sql = "SELECT * FROM Inventory WHERE MED_ID = '$GIVEN_MED_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_BATCH_NO = $row['BATCH_NO'];
+                    echo "$STORED_BATCH_NO";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
+
           <button class="button button-primary" type="submit" name="edit" id="edit">Edit</button>
         </form>
       </div>

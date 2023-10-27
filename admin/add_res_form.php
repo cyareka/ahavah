@@ -17,6 +17,7 @@
 
   <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
   <script src="./backend/site.js"></script>
+
 </head>
 <body>
   <div class="container">
@@ -28,26 +29,177 @@
         <?php  if (isset($errorMessage)) { ?>
         <p><?= $errorMessage; ?></p>
         <?php } ?>
-        <form action="./backend/add_res.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+        <form action="./function/add_res.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
           <label for="RES_ID">RES_ID</label>
             <input type="text" name="RES_ID" id="RES_ID" required>
-          <label for="RES_DATE">RES_DATE</label>
-            <input type="date" name="RES_DATE" id="RES_DATE" required>
           <label for="HAIRD_ID">HAIRD_ID</label>
           <select name="HAIRD_ID" id="HAIRD_ID" required>
-            <option value=""></option>
+            <?php  
+              $servername = "localhost";
+              $username = "root";
+              $password = "";
+              $dbname = "Ahavah_DB";
+              $port = "3308";
+
+              $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+              if (!$conn) {
+                  die("Connection failed: " . mysqli_connect_error());
+              }
+
+              // Display uploaded files
+              $sql = "SELECT * FROM Hairdressers";
+              $result = $conn->query($sql);
+
+              if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                      $HAIRD_ID = $row['HAIRD_ID'];
+                      
+                      echo "<option>$HAIRD_ID</option>";
+                  }
+              } else {
+                  echo "No hairdressers added.";
+              }
+
+              $result->close(); // Close the result set
+              //Close the database connection
+              $conn->close();
+            ?>
           </select>
           <label for="CLIENT_ID">CLIENT_ID</label>
             <select name="CLIENT_ID" id="CLIENT_ID" required>
-              <option value=""></option>
+              <?php  
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "Ahavah_DB";
+                $port = "3308";
+
+                $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                // Display uploaded files
+                $sql = "SELECT * FROM Clients";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $CLIENT_ID = $row['CLIENT_ID'];
+                        
+                        echo "<option>$CLIENT_ID</option>";
+                    }
+                } else {
+                    echo "No Clients added.";
+                }
+
+                $result->close(); // Close the result set
+                //Close the database connection
+                $conn->close();
+              ?>
             </select>
-          <label for="SERVICE_ID">SERVICE_ID</label>
-            <select name="SERVICE_ID" id="SERVICE_ID" required>
-              <option value=""></option>
-            </select>
+
+          <label for="SERVICES"><br>SERVICES</label>
+            <div id="service_list">
+                <span><b>Individual Services</b></span><br>
+                <?php  
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "Ahavah_DB";
+                $port = "3308";
+
+                $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                $sql = "SELECT * FROM Indiv_Services";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $SERVICE_ID = $row['SERVICE_ID'];
+                        echo "<input type='checkbox' id='SERVICE_ID' name='SERVICE_ID' value='$SERVICE_ID'> $SERVICE_ID<br>";
+                    }
+                } else {
+                    echo "No Services added.";
+                }
+
+                $result->close(); // Close the result set
+                //Close the database connection
+                $conn->close();
+                ?>
+                <br>
+                <span><b>Bundled Services</b></span><br>
+                <?php  
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "Ahavah_DB";
+                $port = "3308";
+
+                $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                $sql = "SELECT * FROM Bundled_Services";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $SERVICE_ID = $row['SERVICE_ID'];
+                        echo "<input type='checkbox' id='SERVICE_ID' name='SERVICE_ID' value='$SERVICE_ID'> $SERVICE_ID<br>";
+                    }
+                } else {
+                    echo "No Services added.";
+                }
+
+                $result->close(); // Close the result set
+                //Close the database connection
+                $conn->close();
+              ?>
+              <br>
+            </div>
+
           <label for="PAY_ID">PAY_ID</label>
             <select name="PAY_ID" id="PAY_ID" required>
-              <option value=""></option>
+              <?php  
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "Ahavah_DB";
+                $port = "3308";
+
+                $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                // Display uploaded files
+                $sql = "SELECT * FROM Payments";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $PAY_ID = $row['PAY_ID'];
+                        
+                        echo "<option>$PAY_ID</option>";
+                    }
+                } else {
+                    echo "No Payments added.";
+                }
+
+                $result->close(); // Close the result set
+                //Close the database connection
+                $conn->close();
+              ?>
             </select>
           <label for="APPT_DATE">APPT_DATE</label>
             <input type="date" name="APPT_DATE" id="APPT_DATE" required>

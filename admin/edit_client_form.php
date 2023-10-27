@@ -1,32 +1,3 @@
-<?php /*
-  require_once('./backend/config.php');
-
-  if (isset($_GET["CLIENT_ID"])) {
-    $CLIENT_ID = $_GET["CLIENT_ID"];
-    $sql = "SELECT * FROM Clients WHERE CLIENT_ID = ".$CLIENT_ID;
-
-    $result = $conn->query($sql);
-
-    if ($result && $result->num_rows > 0) {
-      $row = $result->fetch_assoc();
-      $CLIENT_ID = $row['CLIENT_ID'];
-      $CLIENT_FNAME = $row['CLIENT_FNAME'];   
-      $CLIENT_LNAME = $row['CLIENT_LNAME'];
-      $CLIENT_PNAME = $row['CLIENT_PNAME'];
-      $CLIENT_PHONE = $row['CLIENT_PHONE'];
-      $CLIENT_MSNGR = $row['CLIENT_MSNGER'];
-
-      if (!$result) {
-          echo "Error: " . $conn -> error;
-      }
-  } else {
-    echo "No record found.";
-  }
-  } else {
-    echo "Invalid ID.";
-  }
-*/ ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,26 +19,221 @@
   <script src="./backend/site.js"></script>
 </head>
 <body>
+  
+
   <div class="container">
     <div class="row head">
-      <h2>Edit Client (<?php echo $CLIENT_ID; ?>)</h2>
+      <h2>Edit Client 
+        <?php 
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "Ahavah_DB";
+          $port = "3308";
+
+          $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+          if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+          }
+
+          if (isset($_GET["GIVEN_CLIENT_ID"])) {
+            $GIVEN_CLIENT_ID = $_GET["GIVEN_CLIENT_ID"];
+
+            $sql = "SELECT * FROM Clients WHERE CLIENT_ID = '$GIVEN_CLIENT_ID' ";
+
+            $result = $conn->query($sql);
+
+            if (!$result) {echo "Error: " . $conn -> error;}
+
+            $row = $result->fetch_assoc();
+            $STORED_CLIENT_ID = $row['CLIENT_ID'];
+            echo "$STORED_CLIENT_ID";
+          } else {echo "No record found.";}
+        ?>
+      </h2>
     </div>
     <div class="row">
       <div>
         <?php if (isset($errorMessage)) { ?>
         <p><?= $errorMessage; ?></p>
         <?php } ?>
-        <form action="./function/edit_client.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+        <form action="./function/edit_client.php?GIVEN_CLIENT_ID='<?php 
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "Ahavah_DB";
+          $port = "3308";
+
+          $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+          if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+          }
+
+          $GIVEN_CLIENT_ID = $_GET["GIVEN_CLIENT_ID"];
+          echo "$GIVEN_CLIENT_ID"; ?>'" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+          
           <label for="CLIENT_FNAME">CLIENT_FNAME</label>
-            <input type="text" name="CLIENT_FNAME" id="CLIENT_FNAME" required>
+            <input type="text" name="CLIENT_FNAME" id="CLIENT_FNAME" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_CLIENT_ID"])) {
+                    $GIVEN_CLIENT_ID = $_GET["GIVEN_CLIENT_ID"];
+
+                    $sql = "SELECT * FROM Clients WHERE CLIENT_ID = '$GIVEN_CLIENT_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_CLIENT_FNAME = $row['CLIENT_FNAME'];
+                    echo "$STORED_CLIENT_FNAME";
+
+                  } else {echo "No record found.";}  
+                ?>" 
+              required>
+
           <label for="CLIENT_LNAME">CLIENT_LNAME</label>
-            <input type="text" name="CLIENT_LNAME" id="CLIENT_LNAME" required>
+            <input type="text" name="CLIENT_LNAME" id="CLIENT_LNAME" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_CLIENT_ID"])) {
+                    $GIVEN_CLIENT_ID = $_GET["GIVEN_CLIENT_ID"];
+
+                    $sql = "SELECT * FROM Clients WHERE CLIENT_ID = '$GIVEN_CLIENT_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_CLIENT_LNAME = $row['CLIENT_LNAME'];
+                    echo "$STORED_CLIENT_LNAME";
+
+                  } else {echo "No record found.";}  
+                ?>" 
+              required>
+
           <label for="CLIENT_PNAME">CLIENT_PNAME</label>
-            <input type="text" name="CLIENT_PNAME" id="CLIENT_PNAME" required>
+            <input type="text" name="CLIENT_PNAME" id="CLIENT_PNAME" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_CLIENT_ID"])) {
+                    $GIVEN_CLIENT_ID = $_GET["GIVEN_CLIENT_ID"];
+
+                    $sql = "SELECT * FROM Clients WHERE CLIENT_ID = '$GIVEN_CLIENT_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_CLIENT_PNAME = $row['CLIENT_PNAME'];
+                    echo "$STORED_CLIENT_PNAME";
+
+                  } else {echo "No record found.";}  
+                ?>" 
+              required>
+
           <label for="CLIENT_PHONE">CLIENT_PHONE</label>
-            <input type="text" name="CLIENT_PHONE" id="CLIENT_PHONE" required>
+            <input type="text" name="CLIENT_PHONE" id="CLIENT_PHONE" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_CLIENT_ID"])) {
+                    $GIVEN_CLIENT_ID = $_GET["GIVEN_CLIENT_ID"];
+
+                    $sql = "SELECT * FROM Clients WHERE CLIENT_ID = '$GIVEN_CLIENT_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_CLIENT_PHONE = $row['CLIENT_PHONE'];
+                    echo "$STORED_CLIENT_PHONE";
+
+                  } else {echo "No record found.";}  
+                ?>" 
+              required>
+
           <label for="CLIENT_MSNGR">CLIENT_MSNGR</label>
-            <input type="text" name="CLIENT_MSNGR" id="CLIENT_MSNGR" required>
+            <input type="text" name="CLIENT_MSNGR" id="CLIENT_MSNGR" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_CLIENT_ID"])) {
+                    $GIVEN_CLIENT_ID = $_GET["GIVEN_CLIENT_ID"];
+
+                    $sql = "SELECT * FROM Clients WHERE CLIENT_ID = '$GIVEN_CLIENT_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_CLIENT_MSNGR = $row['CLIENT_MSNGR'];
+                    echo "$STORED_CLIENT_MSNGR";
+
+                  } else {echo "No record found.";}  
+                ?>" 
+              required>
+
           <button class="button button-primary" type="submit" name="edit" id="edit">Edit</button>
         </form>
       </div>

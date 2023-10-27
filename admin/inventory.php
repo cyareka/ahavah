@@ -76,7 +76,18 @@
           </thead>
           <tbody>
             <?php
-              require_once '../backend/config.php';
+              $servername = "localhost";
+              $username = "root";
+              $password = "";
+              $dbname = "Ahavah_DB";
+              $port = "3308";
+
+              $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+              if (!$conn) {
+                  die("Connection failed: " . mysqli_connect_error());
+              }
+              
               $sql = "SELECT * FROM Inventory";
               if ($result = $conn -> query($sql)) {
                 while ($row = $result -> fetch_assoc()) {
@@ -87,21 +98,21 @@
                   $SUPPLIER_NAME = $row['SUPPLIER_NAME'];
                   $SUPPLIER_PHONE = $row['SUPPLIER_PHONE'];
                   $BATCH_NO = $row['BATCH_NO'];
+
+                  echo "<tr>";
+                  echo "<td>$MED_ID</td>";
+                  echo "<td>$MED_TYPE</td>";
+                  echo "<td>$QUANTITY</td>";
+                  echo "<td>$SOURCE_LOCATION</td>";
+                  echo "<td>$SUPPLIER_NAME</td>";
+                  echo "<td>$SUPPLIER_PHONE</td>";
+                  echo "<td>$BATCH_NO</td>";
+                  echo "<td><a href='./edit_med_form.php?GIVEN_MED_ID=$MED_ID' class='button'>Edit</a></td>";
+                  echo "<td><a href='./function/del_med.php?GIVEN_MED_ID=$MED_ID' class='button button-primary'>Delete</a></td>";
+                  echo "</tr>";
                 }
               }
             ?>
-            <tr>
-              <td><?php echo $MED_ID; ?></td>
-              <td><?php echo $MED_TYPE; ?></td>
-              <td><?php echo $QUANTITY; ?></td>
-              <td><?php echo $SOURCE_LOCATION; ?></td>
-              <td><?php echo $SUPPLIER_NAME; ?></td>
-              <td><?php echo $SUPPLIER_PHONE; ?></td>
-              <td><?php echo $BATCH_NO; ?></td>
-
-              <td><a href="./admin/edit_med_form.php?=<?php echo $MED_ID; ?>" class="button">Edit</a></td>
-              <td><a href="./function/del_med.php?=<?php echo $MED_ID; ?>" class="button button-primary">Delete</a></td>
-            </tr>
           </tbody>
         </table>
       </div>

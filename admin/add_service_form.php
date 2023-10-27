@@ -30,12 +30,78 @@
         <?php } ?>
         <form action="./function/add_service.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
           <label for="SERVICE_ID">SERVICE_ID</label>
-            <input type="text" name="SERVICE_ID" id="SERVICE_ID" required>
+            <select name='SERVICE_ID'>
+              <optgroup label="Individual Services">
+                <?php  
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "Ahavah_DB";
+                $port = "3308";
+
+                $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                // Display uploaded files
+                $sql = "SELECT * FROM Indiv_Services";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $SERVICE_ID = $row['SERVICE_ID'];
+                        echo "<option id='SERVICE_ID' name='SERVICE_ID' value='$SERVICE_ID'> $SERVICE_ID<br>";
+                    }
+                } else {
+                    echo "No Services added.";
+                }
+
+                $result->close(); // Close the result set
+                //Close the database connection
+                $conn->close();
+              ?>
+              </optgroup>
+
+              <optgroup label="Bundled Services">
+                <?php  
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "Ahavah_DB";
+                $port = "3308";
+
+                $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                // Display uploaded files
+                $sql = "SELECT * FROM Bundled_Services";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $SERVICE_ID = $row['SERVICE_ID'];
+                        echo "<option id='SERVICE_ID' name='SERVICE_ID' value='$SERVICE_ID'> $SERVICE_ID<br>";
+                    }
+                } else {
+                    echo "No Services added.";
+                }
+
+                $result->close(); // Close the result set
+                //Close the database connection
+                $conn->close();
+              ?>
+              </optgroup>
+            </select>
           <label for="PRICE">PRICE</label>
             <input type="text" name="PRICE" id="PRICE" required>
           <label for="MED_ID">MED_ID</label>
-            <select name="MED_ID" id="MED_ID" required>
-              <option value=""></option>
+            <select name="MED_ID" id="MED_ID">
+              <option>none</option>
             </select>
           <button class="button button-primary" type="submit" name="add" id="add">Add</button>
         </form>

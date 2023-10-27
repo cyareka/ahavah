@@ -72,24 +72,36 @@
           </thead>
           <tbody>
           <?php
-              require_once '../backend/config.php';
-              $sql = "SELECT * FROM Service";
-              if ($result = $conn -> query($sql)) {
-                while ($row = $result -> fetch_assoc()) {
-                  $SERVICE_ID = $row['SERVICE_ID'];
-                  $PRICE = $row['PRICE'];
-                  $MED_ID = $row['MED_ID'];
-                }
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "Ahavah_DB";
+            $port = "3308";
+
+            $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+            
+            $sql = "SELECT * FROM Services";
+            if ($result = $conn -> query($sql)) {
+              while ($row = $result -> fetch_assoc()) {
+                $SERVICE_ID = $row['SERVICE_ID'];
+                $PRICE = $row['PRICE'];
+                $MED_ID = $row['MED_ID'];
+
+                echo "<tr>";
+                echo "<td>$SERVICE_ID</td>";
+                echo "<td>$PRICE</td>";
+                echo "<td>$MED_ID</td>";
+                echo "<td><a href='./edit_service_form.php?GIVEN_SERVICE_ID=$SERVICE_ID' class='button'>Edit</a></td>";
+                echo "<td><a href='./function/del_service.php?GIVEN_SERVICE_ID=$SERVICE_ID' class='button button-primary'>Delete</a></td>";
+                echo "</tr>";
               }
+            }
           ?>
-            <tr>
-              <td><?php echo $SERVICE_ID; ?></td>
-              <td><?php echo $PRICE; ?></td>
-              <td><?php echo $MED_ID; ?></td>
-        
-              <td><a href="./admin/edit_bs_form.php?=<?php echo $SERVICE_ID; ?>" class="button">Edit</a></td>
-              <td><a href="./function/del_bs.php?=<?php echo $SERVICE_ID; ?>" class="button button-primary">Delete</a></td>
-            </tr>
+            
           </tbody>
         </table>
       </div>

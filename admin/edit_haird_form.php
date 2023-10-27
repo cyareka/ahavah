@@ -1,30 +1,3 @@
-<?php /*
-  require_once('./backend/config.php');
-
-  if (isset($_GET["HAIRD_ID"])) {
-    $HAIRD_ID = $_GET["HAIRD_ID"];
-    $sql = "SELECT * FROM Hairdressers WHERE HAIRD_ID = ".$HAIRD_ID;
-
-    $result = $conn->query($sql);
-
-    if ($result && $result->num_rows > 0) {
-      $row = $result->fetch_assoc();
-      $HAIRD_ID = $row['HAIRD_ID'];
-      $HAIRD_FNAME = $row['HAIRD_FNAME'];   
-      $HAIRD_LNAME = $row['HAIRD_LNAME'];
-      $HAIRD_PHONE = $row['HAIRD_PHONE'];
-      $HAIRD_MSNGR = $row['HAIRD_MSNGER'];
-
-      if (!$result) {
-          echo "Error: " . $conn -> error;
-      }
-  } else {
-    echo "No record found.";
-  }
-  } else {
-    echo "Invalid ID.";
-  }
-*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,22 +21,184 @@
 <body>
   <div class="container">
     <div class="row head">
-      <h2>Edit Hairdresser (<?php echo $HAIRD_ID; ?>)</h2>
+      <h2>Edit Hairdresser
+        <?php 
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "Ahavah_DB";
+          $port = "3308";
+
+          $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+          if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+          }
+
+          if (isset($_GET["GIVEN_HAIRD_ID"])) {
+            $GIVEN_HAIRD_ID = $_GET["GIVEN_HAIRD_ID"];
+
+            $sql = "SELECT * FROM Hairdressers WHERE HAIRD_ID = '$GIVEN_HAIRD_ID' ";
+
+            $result = $conn->query($sql);
+
+            if (!$result) {echo "Error: " . $conn -> error;}
+
+            $row = $result->fetch_assoc();
+            $STORED_HAIRD_ID = $row['HAIRD_ID'];
+            echo " $STORED_HAIRD_ID";
+          } else {echo "No record found.";}
+        ?>
+      </h2>
     </div>
     <div class="row">
       <div>
         <?php if (isset($errorMessage)) { ?>
         <p><?= $errorMessage; ?></p>
         <?php } ?>
-        <form action="./function/edit_haird.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+        <form action="./function/edit_haird.php?GIVEN_HAIRD_ID='<?php 
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "Ahavah_DB";
+          $port = "3308";
+
+          $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+          if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+          }
+
+          $GIVEN_HAIRD_ID = $_GET["GIVEN_HAIRD_ID"];
+          echo "$GIVEN_HAIRD_ID"; ?>'" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+
           <label for="HAIRD_FNAME">HAIRD_FNAME</label>
-            <input type="text" name="HAIRD_FNAME" id="HAIRD_FNAME" required>
+            <input type="text" name="HAIRD_FNAME" id="HAIRD_FNAME" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_HAIRD_ID"])) {
+                    $GIVEN_HAIRD_ID = $_GET["GIVEN_HAIRD_ID"];
+
+                    $sql = "SELECT * FROM Hairdressers WHERE HAIRD_ID = '$GIVEN_HAIRD_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_HAIRD_FNAME = $row['HAIRD_FNAME'];
+                    echo "$STORED_HAIRD_FNAME";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
+
           <label for="HAIRD_LNAME">HAIRD_LNAME</label>
-            <input type="text" name="HAIRD_LNAME" id="HAIRD_LNAME" required>
+            <input type="text" name="HAIRD_LNAME" id="HAIRD_LNAME" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_HAIRD_ID"])) {
+                    $GIVEN_HAIRD_ID = $_GET["GIVEN_HAIRD_ID"];
+
+                    $sql = "SELECT * FROM Hairdressers WHERE HAIRD_ID = '$GIVEN_HAIRD_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_HAIRD_LNAME = $row['HAIRD_LNAME'];
+                    echo "$STORED_HAIRD_LNAME";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
+
           <label for="HAIRD_PHONE">HAIRD_PHONE</label>
-            <input type="text" name="HAIRD_PHONE" id="HAIRD_PHONE" required>
+            <input type="text" name="HAIRD_PHONE" id="HAIRD_PHONE" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_HAIRD_ID"])) {
+                    $GIVEN_HAIRD_ID = $_GET["GIVEN_HAIRD_ID"];
+
+                    $sql = "SELECT * FROM Hairdressers WHERE HAIRD_ID = '$GIVEN_HAIRD_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_HAIRD_PHONE = $row['HAIRD_PHONE'];
+                    echo "$STORED_HAIRD_PHONE";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
+
           <label for="HAIRD_MSNGR">HAIRD_MSNGR</label>
-            <input type="text" name="HAIRD_MSNGR" id="HAIRD_MSNGR" required>
+            <input type="text" name="HAIRD_MSNGR" id="HAIRD_MSNGR" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_HAIRD_ID"])) {
+                    $GIVEN_HAIRD_ID = $_GET["GIVEN_HAIRD_ID"];
+
+                    $sql = "SELECT * FROM Hairdressers WHERE HAIRD_ID = '$GIVEN_HAIRD_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_HAIRD_MSNGR = $row['HAIRD_MSNGR'];
+                    echo "$STORED_HAIRD_MSNGR";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
           <button class="button button-primary" type="submit" name="edit" id="edit">Edit</button>
         </form>
       </div>

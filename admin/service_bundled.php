@@ -72,24 +72,36 @@
           </thead>
           <tbody>
           <?php
-              require_once '../backend/config.php';
-              $sql = "SELECT * FROM Bundled_Service";
-              if ($result = $conn -> query($sql)) {
-                while ($row = $result -> fetch_assoc()) {
-                  $SERVICE_ID = $row['SERVICE_ID'];
-                  $BS_NAME = $row['BS_NAME'];
-                  $BS_DESC = $row['BS_DESC'];
-                }
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "Ahavah_DB";
+            $port = "3308";
+
+            $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+            
+            $sql = "SELECT * FROM Bundled_Services";
+            if ($result = $conn -> query($sql)) {
+              while ($row = $result -> fetch_assoc()) {
+                $SERVICE_ID = $row['SERVICE_ID'];
+                $BS_NAME = $row['BS_NAME'];
+                $BS_DESC = $row['BS_DESC'];
+
+                echo "<tr>";
+                echo "<td>$SERVICE_ID</td>";
+                echo "<td>$BS_NAME</td>";
+                echo "<td>$BS_DESC</td>";
+                echo "<td><a href='./edit_bs_form.php?GIVEN_SERVICE_ID=$SERVICE_ID' class='button'>Edit</a></td>";
+                echo "<td><a href='./function/del_bs.php?GIVEN_SERVICE_ID=$SERVICE_ID' class='button button-primary'>Delete</a></td>";
+                echo "</tr>";
               }
+            }
           ?>
-            <tr>
-              <td><?php echo $SERVICE_ID; ?></td>
-              <td><?php echo $BS_NAME; ?></td>
-              <td><?php echo $BS_DESC; ?></td>
-        
-              <td><a href="./admin/edit_bs_form.php?=<?php echo $SERVICE_ID; ?>" class="button">Edit</a></td>
-              <td><a href="./function/del_bs.php?=<?php echo $SERVICE_ID; ?>" class="button button-primary">Delete</a></td>
-            </tr>
+           
           </tbody>
         </table>
       </div>

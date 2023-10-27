@@ -74,9 +74,20 @@
             </tr>
           </thead>
           <tbody>
-          <?php
-              require_once '../backend/config.php';
-              $sql = "SELECT * FROM Hairdressers";
+            <?php
+              $servername = "localhost";
+              $username = "root";
+              $password = "";
+              $dbname = "Ahavah_DB";
+              $port = "3308";
+
+              $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+              if (!$conn) {
+                  die("Connection failed: " . mysqli_connect_error());
+              }
+              
+              $sql = "SELECT * FROM Clients";
               if ($result = $conn -> query($sql)) {
                 while ($row = $result -> fetch_assoc()) {
                   $CLIENT_ID = $row['CLIENT_ID'];
@@ -84,21 +95,24 @@
                   $CLIENT_LNAME = $row['CLIENT_LNAME'];
                   $CLIENT_PNAME = $row['CLIENT_PNAME'];
                   $CLIENT_PHONE = $row['CLIENT_PHONE'];
-                  $CLIENT_MSNGER = $row['CLIENT_MSNGER'];
+                  $CLIENT_MSNGR = $row['CLIENT_MSNGR'];
+
+                  echo "<tr>";
+                  echo "<td>$CLIENT_ID</td>";
+                  echo "<td>$CLIENT_FNAME</td>";
+                  echo "<td>$CLIENT_LNAME</td>";
+                  echo "<td>$CLIENT_PNAME</td>";
+                  echo "<td>$CLIENT_PHONE</td>";
+                  echo "<td>$CLIENT_MSNGR</td>";
+                  echo "<td><a href='./edit_client_form.php?GIVEN_CLIENT_ID=$CLIENT_ID' class='button'>Edit</a></td>";
+                  echo "<td><a href='./function/del_client.php?GIVEN_CLIENT_ID=$CLIENT_ID' class='button button-primary'>Delete</a></td>";
+                  echo "</tr>";
                 }
               }
-          ?>
-            <tr>
-              <td><?php echo $CLIENT_ID; ?></td>
-              <td><?php echo $CLIENT_FNAME; ?></td>
-              <td><?php echo $CLIENT_LNAME; ?></td>
-              <td><?php echo $CLIENT_PNAME; ?></td>
-              <td><?php echo $CLIENT_PHONE; ?></td>
-              <td><?php echo $CLIENT_MSNGER; ?></td>
-
-              <td><a href="./admin/edit_client_form.php?=<?php echo $CLIENT_ID; ?>" class="button">Edit</a></td>
-              <td><a href="./function/del_client.php?=<?php echo $CLIENT_ID; ?>" class="button button-primary">Delete</a></td>
-            </tr>
+            ?>
+            
+              
+            
           </tbody>
         </table>
       </div>

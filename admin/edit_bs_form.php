@@ -1,28 +1,3 @@
-<?php /*
-  require_once('./backend/config.php');
-
-  if (isset($_GET["SERVICE_ID"])) {
-    $SERVICE_ID = $_GET["SERVICE_ID"];
-    $sql = "SELECT * FROM Bundled_Service WHERE SERVICE_ID = ".$SERVICE_ID;
-
-    $result = $conn->query($sql);
-
-    if ($result && $result->num_rows > 0) {
-      $row = $result->fetch_assoc();
-      $SERVICE_ID = $row['SERVICE_ID'];
-      $BS_NAME = $row['BS_NAME'];   
-      $BS_DESC = $row['BS_DESC'];
-
-      if (!$result) {
-          echo "Error: " . $conn -> error;
-      }
-  } else {
-    echo "No record found.";
-  }
-  } else {
-    echo "Invalid ID.";
-  }
-*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,18 +21,119 @@
 <body>
   <div class="container">
     <div class="row head">
-        <h2>Edit Bundled Service (<?php echo $SERVICE_ID; ?>)</h2>
+        <h2>Edit Bundled Service 
+          <?php 
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "Ahavah_DB";
+            $port = "3308";
+
+            $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+
+            if (isset($_GET["GIVEN_HAIRD_ID"])) {
+              $GIVEN_HAIRD_ID = $_GET["GIVEN_HAIRD_ID"];
+
+              $sql = "SELECT * FROM Bundled_Services WHERE SERVICE_ID = '$GIVEN_SERVICE_ID' ";
+
+              $result = $conn->query($sql);
+
+              if (!$result) {echo "Error: " . $conn -> error;}
+
+              $row = $result->fetch_assoc();
+              $STORED_SERVICE_ID = $row['SERVICE_ID'];
+              echo " $STORED_SERVICE_ID";
+            } else {echo "No record found.";}
+          ?>
+        </h2>
     </div>
     <div class="row">
       <div>
         <?php  if (isset($errorMessage)) { ?>
         <p><?= $errorMessage; ?></p>
         <?php } ?>
-        <form action="./function/edit_bs.php" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+        <form action="./function/edit_BS.php?GIVEN_SERVICE_ID='<?php 
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "Ahavah_DB";
+          $port = "3308";
+
+          $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+          if (!$conn) {
+              die("Connection failed: " . mysqli_connect_error());
+          }
+
+          $GIVEN_SERVICE_ID = $_GET["GIVEN_SERVICE_ID"];
+          echo "$GIVEN_SERVICE_ID"; ?>'" method="post" style="display: flex; flex-direction: column; justify-content: flex-start; margin: 20px 0 20px 0;" enctype="multipart/form-data">
+
           <label for="BS_NAME">BS_NAME</label>
-            <input type="text" name="BS_NAME" id="BS_NAME" required>
+            <input type="text" name="BS_NAME" id="BS_NAME" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_SERVICE_ID"])) {
+                    $GIVEN_SERVICE_ID = $_GET["GIVEN_SERVICE_ID"];
+
+                    $sql = "SELECT * FROM Bundled_Services WHERE SERVICE_ID = '$GIVEN_SERVICE_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_BS_NAME = $row['BS_NAME'];
+                    echo "$STORED_BS_NAME";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
           <label for="BS_DESC">BS_DESC</label>
-            <input type="text" name="BS_DESC" id="BS_DESC" required>
+            <input type="text" name="BS_DESC" id="BS_DESC" 
+              value="<?php 
+                  $servername = "localhost";
+                  $username = "root";
+                  $password = "";
+                  $dbname = "Ahavah_DB";
+                  $port = "3308";
+
+                  $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+                  if (!$conn) {
+                      die("Connection failed: " . mysqli_connect_error());
+                  }
+
+                  if (isset($_GET["GIVEN_SERVICE_ID"])) {
+                    $GIVEN_SERVICE_ID = $_GET["GIVEN_SERVICE_ID"];
+
+                    $sql = "SELECT * FROM Bundled_Services WHERE SERVICE_ID = '$GIVEN_SERVICE_ID' ";
+
+                    $result = $conn->query($sql);
+
+                    if (!$result) {echo "Error: " . $conn -> error;}
+
+                    $row = $result->fetch_assoc();
+                    $STORED_BS_DESC = $row['BS_DESC'];
+                    echo "$STORED_BS_DESC";
+
+                  } else {echo "No record found.";}  
+                ?>"
+              required>
           <button class="button button-primary" type="submit" name="edit" id="edit">Edit</button>
         </form>
       </div>

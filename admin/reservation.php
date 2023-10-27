@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -74,9 +74,20 @@
             </tr>
           </thead>
           <tbody>
-          <?php
-              require_once '../backend/config.php';
-              $sql = "SELECT * FROM Reservation";
+            <?php
+              $servername = "localhost";
+              $username = "root";
+              $password = "";
+              $dbname = "Ahavah_DB";
+              $port = "3308";
+
+              $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+              if (!$conn) {
+                  die("Connection failed: " . mysqli_connect_error());
+              }
+
+              $sql = "SELECT * FROM Reservations";
               if ($result = $conn -> query($sql)) {
                 while ($row = $result -> fetch_assoc()) {
                   $RES_ID = $row['RES_ID'];
@@ -86,21 +97,21 @@
                   $SERVICE_ID = $row['SERVICE_ID'];
                   $PAY_ID = $row['PAY_ID'];
                   $APPT_DATE = $row['APPT_DATE'];
+
+                  echo "<tr>";
+                  echo "<td>$RES_ID</td>";
+                  echo "<td>$RES_DATE</td>";
+                  echo "<td>$HAIRD_ID</td>";
+                  echo "<td>$CLIENT_ID</td>";
+                  echo "<td>$SERVICE_ID</td>";
+                  echo "<td>$PAY_ID</td>";
+                  echo "<td>$APPT_DATE</td>";
+                  echo "<td><a href='./edit_res_form.php?GIVEN_RES_ID=$RES_ID' class='button'>Edit</a></td>";
+                  echo "<td><a href='./function/del_res.php?GIVEN_RES_ID=$RES_ID' class='button button-primary'>Delete</a></td>";
+                  echo "</tr>";
                 }
-              }
-          ?>
-            <tr>
-              <td><?php echo $RES_ID; ?></td>
-              <td><?php echo $RES_DATE; ?></td>
-              <td><?php echo $HAIRD_ID; ?></td>
-              <td><?php echo $CLIENT_ID; ?></td>
-              <td><?php echo $SERVICE_ID; ?></td>
-              <td><?php echo $PAY_ID; ?></td>
-              <td><?php echo $APPT_DATE; ?></td>
-        
-              <td><a href="./admin/edit_res_form.php?=<?php echo $RES_ID; ?>" class="button">Edit</a></td>
-              <td><a href="./function/del_res.php?=<?php echo $RES_ID; ?>" class="button button-primary">Delete</a></td>
-            </tr>
+              }  
+            ?>
           </tbody>
         </table>
       </div>

@@ -36,7 +36,7 @@
           <label for="CLIENT_LNAME">CLIENT_LNAME</label>
             <input type="text" name="CLIENT_LNAME" id="CLIENT_LNAME" required>
           <label for="CLIENT_PNAME">CLIENT_PNAME</label>
-            <input type="text" name="CLIENT_PNAME" id="CLIENT_PNAME" required>
+            <input type="text" name="CLIENT_PNAME" id="CLIENT_PNAME">
           <label for="CLIENT_PHONE">CLIENT_PHONE</label>
             <input type="text" name="CLIENT_PHONE" id="CLIENT_PHONE" required>
           <label for="CLIENT_MSNGR">CLIENT_MSNGR</label>

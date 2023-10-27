@@ -73,9 +73,20 @@
             </tr>
           </thead>
           <tbody>
-          <?php
-              require_once '../backend/config.php';
-              $sql = "SELECT * FROM Hairdressers";
+            <?php
+              $servername = "localhost";
+              $username = "root";
+              $password = "";
+              $dbname = "Ahavah_DB";
+              $port = "3308";
+
+              $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+              if (!$conn) {
+                  die("Connection failed: " . mysqli_connect_error());
+              }
+              
+              $sql = "SELECT * FROM Payments";
               if ($result = $conn -> query($sql)) {
                 while ($row = $result -> fetch_assoc()) {
                   $PAY_ID = $row['PAY_ID'];
@@ -83,19 +94,19 @@
                   $PAY_TYPE = $row['PAY_TYPE'];
                   $PAY_RECEIPT = $row['PAY_RECEIPT'];
                   $PAY_STATUS = $row['PAY_STATUS'];
+                  
+                  echo "<tr>";
+                  echo "<td>$PAY_ID</td>";
+                  echo "<td>$AMOUNT</td>";
+                  echo "<td>$PAY_TYPE</td>";
+                  echo "<td>$PAY_RECEIPT</td>";
+                  echo "<td>$PAY_STATUS</td>";
+                  echo "<td><a href='./edit_pay_form.php?GIVEN_PAY_ID=$PAY_ID' class='button'>Edit</a></td>";
+                  echo "<td><a href='./function/del_pay.php?GIVEN_PAY_ID=$PAY_ID' class='button button-primary'>Delete</a></td>";
+                  echo "</tr>";
                 }
               }
-          ?>
-            <tr>
-              <td><?php echo $PAY_ID; ?></td>
-              <td><?php echo $AMOUNT; ?></td>
-              <td><?php echo $PAY_TYPE; ?></td>
-              <td><?php echo $PAY_RECEIPT; ?></td>
-              <td><?php echo $PAY_STATUS; ?></td>
-
-              <td><a href="./admin/edit_pay_form.php?=<?php echo $PAY_ID; ?>" class="button">Edit</a></td>
-              <td><a href="./function/del_pay.php?=<?php echo $PAY_ID; ?>" class="button button-primary">Delete</a></td>
-            </tr>
+            ?>
           </tbody>
         </table>
       </div>

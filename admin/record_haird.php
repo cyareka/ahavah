@@ -74,7 +74,18 @@
           </thead>
           <tbody>
           <?php
-              require_once '../backend/config.php';
+              $servername = "localhost";
+              $username = "root";
+              $password = "";
+              $dbname = "Ahavah_DB";
+              $port = "3308";
+
+              $conn = mysqli_connect($servername, $username, $password, $dbname, $port);
+
+              if (!$conn) {
+                  die("Connection failed: " . mysqli_connect_error());
+              }
+              
               $sql = "SELECT * FROM Hairdressers";
               if ($result = $conn -> query($sql)) {
                 while ($row = $result -> fetch_assoc()) {
@@ -82,20 +93,20 @@
                   $HAIRD_FNAME = $row['HAIRD_FNAME'];
                   $HAIRD_LNAME = $row['HAIRD_LNAME'];
                   $HAIRD_PHONE = $row['HAIRD_PHONE'];
-                  $HAIRD_MSNGER = $row['HAIRD_MSNGER'];
+                  $HAIRD_MSNGER = $row['HAIRD_MSNGR'];
+
+                  echo "<tr>";
+                  echo "<td>$HAIRD_ID</td>";
+                  echo "<td>$HAIRD_FNAME</td>";
+                  echo "<td>$HAIRD_LNAME</td>";
+                  echo "<td>$HAIRD_PHONE</td>";
+                  echo "<td>$HAIRD_MSNGER</td>";
+                  echo "<td><a href='./edit_haird_form.php?GIVEN_HAIRD_ID=$HAIRD_ID' class='button'>Edit</a></td>";
+                  echo "<td><a href='./function/del_haird.php?GIVEN_HAIRD_ID=$HAIRD_ID' class='button button-primary'>Delete</a></td>";
+                  echo "</tr>";
                 }
               }
           ?>
-            <tr>
-              <td><?php echo $HAIRD_ID; ?></td>
-              <td><?php echo $HAIRD_FNAME; ?></td>
-              <td><?php echo $HAIRD_LNAME; ?></td>
-              <td><?php echo $HAIRD_PHONE; ?></td>
-              <td><?php echo $HAIRD_MSNGER; ?></td>
-
-              <td><a href="./admin/edit_haird_form.php?=<?php echo $HAIRD_ID; ?>" class="button">Edit</a></td>
-              <td><a href="./function/del_haird.php?=<?php echo $HAIRD_ID; ?>" class="button button-primary">Delete</a></td>
-            </tr>
           </tbody>
         </table>
       </div>
